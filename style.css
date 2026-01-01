@@ -1,0 +1,543 @@
+/* --- 1. SETUP VARIABEL & RESET --- */
+:root {
+    --bg-dark: #0a0f1d;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --accent: #38bdf8; /* Biru Neon */
+    --accent-glow: rgba(56, 189, 248, 0.6);
+    --glass-bg: rgba(13, 18, 30, 0.95);
+    --border: rgba(56, 189, 248, 0.2);
+    --font-code: 'Fira Code', monospace;
+    --font-body: 'Poppins', sans-serif;
+}
+/* --- CUSTOM SCROLLBAR (BIAR GANTENG) --- */
+::-webkit-scrollbar {
+    width: 8px; /* Lebar scrollbar */
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark); /* Warna latar (Hitam) */
+}
+::-webkit-scrollbar-thumb {
+    background: var(--accent); /* Warna batangnya (Biru Neon) */
+    border-radius: 10px; /* Biar tumpul */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #fff; /* Jadi putih pas disorot */
+}
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    /* --- TAMBAHAN ANTI COPAS (BARU) --- */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* --- 2. BACKGROUND & NAVBAR --- */
+#particles-js { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+header { position: absolute; top: 0; width: 100%; padding: 20px 5%; z-index: 10; }
+.logo { font-family: var(--font-code); font-size: 1.2rem; font-weight: bold; color: var(--accent); }
+
+/* --- 3. DASHBOARD CONTAINER (FIX TINGGI) --- */
+.dashboard-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* JANGAN CENTER, BIAR GAK NGAMBANG DI TENGAH */
+    padding: 20px;
+    padding-top: 100px; /* Jarak dari atas biar lega */
+    padding-bottom: 50px;
+}
+
+.main-card {
+    width: 100%;
+    max-width: 800px;
+    /* INI PERBAIKANNYA: JANGAN DIKUNCI MATI */
+    min-height: 80vh; /* Minimal segini, tapi bisa manjang */
+    height: auto;     /* Bebas memanjang */
+    
+    background: var(--glass-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header Profile */
+.profile-header { padding: 30px; border-bottom: 1px solid var(--border); text-align: center; background: rgba(0,0,0,0.2); }
+/* --- NAMA ERRY (HOLOGRAPHIC EFFECT) --- */
+.profile-header h1 { 
+    font-size: 2.5rem; 
+    margin-bottom: 5px; 
+    font-weight: 800; /* Biar tebal gagah */
+    
+    /* Warna Gradasi Gerak */
+    background: linear-gradient(
+        90deg,
+        #38bdf8 0%,   /* Biru Neon */
+        #ffffff 50%,  /* Putih Kilap */
+        #38bdf8 100%  /* Biru Neon */
+    );
+    background-size: 200% auto;
+    
+    /* Teknik Potong Warna ke Teks */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Animasi */
+    animation: shine 3s linear infinite;
+}
+
+/* Tambahin ini di bawahnya kalau belum ada */
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+.typing-wrapper { font-family: var(--font-code); color: var(--accent); font-size: 1rem; }
+.cursor { animation: blink 1s infinite; } @keyframes blink { 50% { opacity: 0; } }
+
+/* Navigasi */
+.nav-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; border-bottom: 1px solid var(--border); }
+.nav-btn {
+    background: transparent; border: none; border-right: 1px solid var(--border);
+    color: var(--text-secondary); padding: 15px 5px; cursor: pointer; transition: 0.3s;
+    font-size: 0.95rem; display: flex; flex-direction: column; align-items: center; gap: 5px;
+}
+.nav-btn:last-child { border-right: none; }
+.nav-btn:hover { background: rgba(56, 189, 248, 0.05); color: #fff; }
+.nav-btn.active { background: rgba(56, 189, 248, 0.1); color: var(--accent); border-bottom: 3px solid var(--accent); }
+
+/* CONTENT AREA (LEGA & RAPI) */
+.content-area {
+    padding: 40px; /* Padding digedein biar lega */
+    min-height: 400px; /* Minimal tinggi konten */
+    text-align: left;
+}
+
+/* Tab Content */
+.tab-content { display: none; animation: fadeIn 0.4s ease; }
+.tab-content.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Typography */
+h3 { font-family: var(--font-code); color: var(--accent); margin-top: 0; margin-bottom: 25px; font-size: 1.2rem; border-bottom: 1px dashed var(--border); padding-bottom: 10px; }
+p { font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 20px; }
+
+/* ABOUT STYLE */
+.profile-quote { font-style: italic; color: #fff; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid var(--accent); }
+.highlight-text { color: var(--accent); font-weight: bold; }
+.tags-container { margin-top: 20px; }
+.tech-tag { display: inline-block; border: 1px solid var(--accent); color: var(--accent); padding: 6px 12px; border-radius: 20px; font-size: 0.85rem; margin-right: 8px; margin-bottom: 8px; }
+
+/* EXPERIENCE STYLE */
+.timeline-item { margin-bottom: 30px; padding-left: 20px; border-left: 2px solid var(--border); position: relative; }
+.timeline-item::before { content: ''; position: absolute; left: -6px; top: 0; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); }
+.timeline-item .date { font-size: 0.85rem; color: var(--accent); font-family: var(--font-code); display: block; margin-bottom: 5px; }
+.timeline-item h4 { color: #fff; font-size: 1.1rem; margin-bottom: 5px; }
+.job-role { color: #fff; margin-bottom: 5px; font-size: 1rem; margin-top: 10px; font-weight: bold; }
+.badge { background: rgba(56, 189, 248, 0.2); color: var(--accent); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; margin-left: 5px; font-family: var(--font-code); }
+.job-list { list-style: none; padding-left: 0; margin-bottom: 10px; }
+.job-list li { position: relative; padding-left: 15px; margin-bottom: 8px; font-size: 0.95rem; color: var(--text-secondary); }
+.job-list li::before { content: "▹"; position: absolute; left: 0; color: var(--accent); }
+
+/* PROJECTS STYLE */
+.project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; align-items: start; }
+.project-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 12px; padding: 25px; text-align: left; cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 15px; }
+.project-card:hover { background: rgba(56, 189, 248, 0.1); border-color: var(--accent); transform: translateY(-5px); }
+.project-card i { font-size: 2rem; color: var(--accent); }
+.p-info h4 { margin: 0; color: #fff; font-size: 1rem; font-family: var(--font-code); }
+.p-info span { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); backdrop-filter: blur(5px); justify-content: center; align-items: center; }
+.modal-overlay.show { display: flex; }
+.modal-content { background: #0f172a; border: 1px solid var(--accent); border-radius: 15px; width: 90%; max-width: 500px; padding: 30px; position: relative; box-shadow: 0 0 30px var(--accent-glow); text-align: left; }
+.close-modal { position: absolute; top: 15px; right: 20px; color: #aaa; font-size: 30px; cursor: pointer; }
+/* Pastikan kode ini ada di style.css lu */
+.modal-image {
+    width: 100%;
+    height: 250px; /* Tinggi kita kunci biar seragam */
+    object-fit: cover; /* INI KUNCINYA: Biar gambar gak gepeng */
+    object-position: center; /* Fokus ke tengah gambar */
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border);
+    background: #000;
+}
+.modal-tags .modal-tag { display: inline-block; background: rgba(56, 189, 248, 0.15); color: var(--accent); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; margin-right: 5px; border: 1px solid var(--accent); margin-top: 10px; }
+
+/* CONTACT STYLE */
+.contact-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 30px; }
+.contact-card { display: flex; align-items: center; justify-content: center; gap: 12px; padding: 15px 40px; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); border-radius: 50px; color: var(--text-primary); text-decoration: none; transition: 0.3s; font-family: var(--font-code); font-size: 1rem; min-width: 160px; }
+.contact-card:hover { border-color: var(--accent); background: var(--accent); color: var(--bg-dark); }
+.contact-card i { color: var(--accent); font-size: 1.2rem; } .contact-card:hover i { color: var(--bg-dark); }
+
+footer { text-align: center; font-size: 0.8rem; color: #555; padding: 30px 20px; margin-top: auto; }
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .dashboard-container { padding-top: 80px; }
+    .nav-btn span { display: none; }
+    .nav-btn i { font-size: 1.2rem; }
+    .main-card { width: 95%; min-height: auto; } /* Di HP biarin auto */
+    .project-grid { grid-template-columns: 1fr; }
+    .chat-box { width: 300px; right: -10px; }
+}
+/* --- EXPERIENCE LIST STYLING --- */
+.job-role {
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+}
+
+.job-role .badge {
+    background: rgba(56, 189, 248, 0.2);
+    color: var(--accent);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-left: 5px;
+    font-family: 'Fira Code', monospace;
+}
+
+.timeline-item h4 small {
+    color: var(--muted);
+    font-size: 0.8rem;
+    font-weight: normal;
+}
+
+/* Bikin bullet point jadi panah keren */
+.job-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.job-list li {
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.job-list li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+/* --- ABOUT SECTION (REVISI RAPI) --- */
+
+/* Gaya Kutipan (Quote) */
+.profile-quote {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #fff;
+    font-style: italic;
+    padding: 20px;
+    background: rgba(56, 189, 248, 0.08); /* Biru tipis banget */
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Gaya Paragraf */
+.profile-text p {
+    text-align: left; /* Rata kiri lebih rapi di web daripada Justify */
+    margin-bottom: 20px; /* Jarak antar paragraf */
+    line-height: 1.8;    /* Spasi baris lega */
+    font-size: 0.95rem;
+    color: #cbd5e1;      /* Warna abu terang (gak bikin sakit mata) */
+    letter-spacing: 0.3px; /* Jarak antar huruf */
+}
+
+/* Highlight Kata Penting */
+.profile-text strong {
+    color: var(--accent); /* Biru Neon */
+    font-weight: 600;
+}
+
+.highlight-text {
+    background: rgba(56, 189, 248, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.profile-text em {
+    font-style: normal;
+    text-decoration: underline;
+    text-decoration-color: rgba(56, 189, 248, 0.5);
+    color: #fff;
+}
+
+/* Tags Skill di Bawah */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tech-tag {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-family: 'Fira Code', monospace;
+}
+/* --- MODERN CONTACT GRID --- */
+.contact-grid-modern {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Otomatis ngatur kolom */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.contact-card-modern {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px 15px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Styling Ikon */
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    transition: 0.3s;
+}
+
+/* Styling Teks */
+.card-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #fff;
+    font-family: 'Fira Code', monospace;
+}
+.card-info span {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+/* WARNA KHUSUS TIAP KARTU (BIAR GAK MONOTON) */
+/* WhatsApp Hijau */
+.contact-card-modern.wa .card-icon { color: #00ff5e; }
+.contact-card-modern.wa:hover { 
+    background: rgba(37, 211, 102, 0.1); 
+    border-color: #25D366; 
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+}
+
+/* Email Merah/Oranye */
+.contact-card-modern.email .card-icon { color: #EA4335; }
+.contact-card-modern.email:hover { 
+    background: rgba(234, 67, 53, 0.1); 
+    border-color: #EA4335; 
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(234, 67, 53, 0.3);
+}
+
+/* GitHub Putih/Abu */
+.contact-card-modern.gh .card-icon { color: #f0f6fc; }
+.contact-card-modern.gh:hover { 
+    background: rgba(255, 255, 255, 0.1); 
+    border-color: #fff; 
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.3);
+}
+/* --- PROJECT CARDS --- */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsif */
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.project-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.project-card i {
+    font-size: 2rem;
+    color: var(--accent);
+    transition: 0.3s;
+}
+
+.project-card h4 {
+    margin: 0;
+    color: #fff;
+    font-size: 1rem;
+    font-family: 'Fira Code', monospace;
+}
+
+.project-card span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.project-card:hover {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: var(--accent);
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--accent-glow);
+}
+
+/* --- MODAL POP-UP (THE MAGIC) --- */
+.modal-overlay {
+    display: none; /* Sembunyi dulu */
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Gelap di belakang */
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #0f172a;
+    border: 1px solid var(--accent);
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    padding: 25px;
+    position: relative;
+    box-shadow: 0 0 30px var(--accent-glow);
+    transform: scale(0.8);
+    transition: transform 0.3s ease;
+    text-align: left;
+}
+
+.modal-overlay.show .modal-content {
+    transform: scale(1);
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.close-modal:hover { color: var(--accent); }
+
+.modal-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: #000; /* Placeholder warna */
+}
+
+#modal-title { color: var(--accent); margin-bottom: 10px; font-family: 'Fira Code'; }
+#modal-desc { color: #ccc; font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px; }
+
+.modal-tag {
+    display: inline-block;
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-right: 5px;
+    border: 1px solid var(--accent);
+}
+/* --- STATUS BADGE (KEDIP HIJAU) --- */
+.status-badge {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #2ecc71; /* Hijau Online */
+    border-radius: 50%;
+    margin-left: 10px;
+    box-shadow: 0 0 0 rgba(46, 204, 113, 0.4);
+    animation: pulse-green 2s infinite;
+    vertical-align: middle;
+}
+
+@keyframes pulse-green {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(46, 204, 113, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
+}
+/* --- PRELOADER STYLE --- */
+#preloader {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #0a0f1d;
+    z-index: 99999; /* Paling depan */
+    display: flex; justify-content: center; align-items: center;
+    transition: opacity 0.5s ease;
+}
+.loader-content { text-align: center; }
+.loader-text { 
+    font-family: 'Fira Code', monospace; 
+    color: var(--accent); 
+    font-size: 1.2rem; 
+    margin-bottom: 10px; 
+    display: block; 
+    animation: blink 1s infinite; 
+}
+.loader-bar {
+    width: 150px; height: 3px; background: rgba(255,255,255,0.1);
+    position: relative; overflow: hidden; margin: 0 auto; border-radius: 5px;
+}
+.loader-bar::after {
+    content: ''; position: absolute; top: 0; left: 0; height: 100%; width: 50%;
+    background: var(--accent); animation: loading 1.5s infinite ease-in-out;
+}
+@keyframes loading {
+    0% { left: -50%; } 100% { left: 100%; }
+}

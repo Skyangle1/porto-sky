@@ -1,0 +1,26 @@
+# --- HANYA PENGATURAN KEAMANAN (TANPA SERVER) ---
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # 1. Anti-Clickjacking: Web lu gak bisa di-embed/dijiplak di web orang lain
+    X-Frame-Options = "DENY"
+
+    # 2. Anti-MIME Sniffing: Browser harus baca file sesuai aslinya (safety)
+    X-Content-Type-Options = "nosniff"
+
+    # 3. XSS Protection: Blokir script aneh
+    X-XSS-Protection = "1; mode=block"
+
+    # 4. HSTS: Paksa HTTPS (Gembok Hijau)
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+    # 5. Privasi User saat klik link keluar
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+    # 6. Matikan fitur HP yang gak dipake (Kamera, Mic, Lokasi)
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+    # 7. CSP (CONTENT SECURITY POLICY) - VERSI MANUAL
+    # Kita izinkan script sendiri, FontAwesome (Ikon), dan Netlify. Gak ada Google AI.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' https://kit.fontawesome.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://ka-f.fontawesome.com; img-src 'self' data: https:;"

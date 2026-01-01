@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Erry Triranaya | Portfolio</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+
+    <div id="preloader">
+        <div class="loader-content">
+            <span class="loader-text">> Initializing System...</span>
+            <div class="loader-bar"></div>
+        </div>
+    </div>
+
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo">&lt;Trinerry/&gt;</div>
+    </header>
+    
+    <main class="dashboard-container">
+        <div class="main-card">
+            
+            <div class="profile-header">
+                <div class="profile-info">
+                    <h1>
+                     Erry Triranaya 
+                    <span class="status-badge" title="Open to Work"></span>
+                    </h1>
+                    <div class="typing-wrapper">
+                        <span class="prompt">> </span>
+                        <span id="role-text"></span><span class="cursor">|</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-grid">
+                <button class="nav-btn active" onclick="openTab('about')">
+                    <i class="fas fa-user"></i> About
+                </button>
+                <button class="nav-btn" onclick="openTab('experience')">
+                    <i class="fas fa-briefcase"></i> Experience
+                </button>
+                    <button class="nav-btn" onclick="openTab('projects')">
+                        Projects
+                     </button>
+                <button class="nav-btn" onclick="openTab('contact')">
+                    <i class="fas fa-envelope"></i> Contact
+                </button>
+            </div>
+
+            <div class="content-area">
+                
+                <div id="about" class="tab-content active">
+                    <h3>// Professional Profile</h3>
+                    <div class="profile-quote">"Bridging Mechanical Precision with Analytical Strategy."</div>
+                    <div class="profile-text">
+                        <p>
+                            I am a technical professional with over <span class="highlight-text">6 years</span> of field experience. 
+                            My career is built upon a solid foundation in <strong>Industrial Electromechanical Maintenance</strong> (Dynamo & Gearbox), 
+                            combined with high integrity in operational roles.
+                        </p>
+                        <p>
+                            Currently expanding into the digital realm, integrating mechanical discipline with 
+                            <strong>Financial Market Analysis</strong> and <strong>Basic Programming Logic</strong>.
+                        </p>
+                    </div>
+                    <div class="tags-container">
+                        <span class="tech-tag">Mechanical Engineering</span>
+                        <span class="tech-tag">Data Analysis</span>
+                        <span class="tech-tag">Digital Adaptability</span>
+                    </div>
+                </div>
+
+                <div id="experience" class="tab-content">
+                    <h3>// Work Experience</h3>
+                    
+                    <div class="timeline-item">
+                        <span class="date">2021 – Present</span>
+                        <h4>PT. HOKI ALAM SEMESTA JAYA <small>(Aquaculture)</small></h4>
+                        
+                        <div class="job-role"><strong>Internal Fleet & Logistics Support</strong> <span class="badge">2024 – Present</span></div>
+                        <ul class="job-list">
+                            <li>Managed internal site mobility and ensured the secure distribution of logistical assets.</li>
+                            <li>Conducted preventive maintenance on operational vehicles to ensure 100% readiness and safety.</li>
+                        </ul>
+
+                        <div class="job-role" style="margin-top: 15px;"><strong>Electromechanical Technician</strong> <span class="badge">2021 – 2023</span></div>
+                        <ul class="job-list">
+                            <li>Maintained critical aeration systems (Waterwheels) to stabilize oxygen levels for production.</li>
+                            <li>Performed troubleshooting on dynamos and electrical panels in high-salinity (corrosive) environments.</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="date">2020 – 2021</span>
+                        <h4>PT. KAMABE ENGINEERING <small>(Engineering Services)</small></h4>
+                        <div class="job-role"><strong>Junior Technician (Industrial Trainee)</strong></div>
+                        <ul class="job-list">
+                            <li>Industrial Compliance: Executed dynamo maintenance adhering to strict factory SOPs.</li>
+                            <li>Precision Rewinding: Performed stator rewinding and mechanical assembly.</li>
+                            <li>Quality Control: Conducted rigorous load testing and insulation checks.</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="date">2019 – 2021</span>
+                        <h4>PT.SENTRAL WICAKSANA WORKSHOP <small>(General Engineering)</small></h4>
+                        <div class="job-role"><strong>Workshop Specialist</strong></div>
+                        <ul class="job-list">
+                            <li>Component Overhaul: Specialized in the repair and service of various Dynamo and Gearbox types.</li>
+                            <li>Diagnostic & Repair: Analyzed mechanical failures and replaced critical components.</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline-item">
+                        <span class="date">2017 – 2019</span>
+                        <h4>STATIONERY & DIGITAL SERVICE</h4>
+                        <div class="job-role"><strong>Digital & Equipment Staff</strong></div>
+                        <ul class="job-list">
+                            <li>Equipment Maintenance: Operated and performed basic maintenance on high-volume photocopiers.</li>
+                            <li>Digital Processing: Provided digital document editing and photography services.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="projects" class="tab-content">
+                    <h3>// Portfolio Highlights</h3>
+                    <p class="contact-intro" style="margin-bottom: 20px;">Klik kartu untuk melihat detail project.</p>
+                    
+                    <div class="project-grid">
+                        
+                        <div class="project-card" onclick="openModal('motor')">
+                            <div class="card-icon-box"><i class="fas fa-cogs"></i></div>
+                            <div class="p-info">
+                                <h4>Industrial Motor Overhaul</h4>
+                                <span>Electro-Mechanical</span>
+                            </div>
+                            <i class="fas fa-arrow-right arrow-icon"></i>
+                        </div>
+
+                        <div class="project-card" onclick="openModal('ea')">
+                            <div class="card-icon-box"><i class="fas fa-chart-line"></i></div>
+                            <div class="p-info">
+                                <h4>Scalper EA Forex</h4>
+                                <span>MQL5 Algo Trading</span>
+                            </div>
+                            <i class="fas fa-arrow-right arrow-icon"></i>
+                        </div>
+
+                        <div class="project-card" onclick="openModal('web')">
+                            <div class="card-icon-box"><i class="fas fa-globe"></i></div>
+                            <div class="p-info">
+                                <h4>Interactive Portfolio</h4>
+                                <span>Web Development</span>
+                            </div>
+                            <i class="fas fa-arrow-right arrow-icon"></i>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="contact" class="tab-content">
+                    <h3>// Connect With Me</h3>
+                    <div class="contact-links">
+                        <a href="https://wa.me/62817812164" target="_blank" class="contact-card">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="mailto:errytriranaya22@gmail.com" class="contact-card">
+                            <i class="fas fa-envelope"></i> Email
+                        </a>
+                        <a href="https://github.com/Skyangle1" target="_blank" class="contact-card">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    </div>
+                </div>
+
+            </div> </div> </main>
+
+   <footer>
+        <p>&copy; <span id="year"></span> Erry Triranaya. Built with Logic & Passion.</p>
+    </footer>
+
+
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img id="modal-img" src="" alt="Project Image" class="modal-image">
+            <h2 id="modal-title"></h2>
+            <p id="modal-desc"></p>
+            <div class="modal-tags" id="modal-tech"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
